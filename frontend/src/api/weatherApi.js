@@ -1,7 +1,9 @@
 // URL-urile de baza ale backend-ului Express.
 // In dezvoltare, Vite trimite /api catre http://localhost:5000 prin proxy.
-const WEATHER_URL = "/api/weather";
-const HISTORY_URL = "/api/history";
+const BASE_URL = "https://meteo-app-pxu6.onrender.com/api";
+
+const WEATHER_URL = `${BASE_URL}/weather`;
+const HISTORY_URL = `${BASE_URL}/history`;
 
 // GET /api/weather?city=Iasi
 export async function getWeatherByCity(city) {
