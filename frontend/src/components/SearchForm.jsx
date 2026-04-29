@@ -1,5 +1,5 @@
-export default function SearchForm({ city, setCity, error, loading, onSubmit }) {
-  return (
+export default function SearchForm({ city, setCity, error, loading, onSubmit }) {//primeste valoarea de input, functia de actualizare a valorii, mesajul de erore daca este cazul, dac se face request și functia apelata la submit
+  return (//unde user-ul introduce orasul doar transforma ce primeste de la backend in componente ui
     <form
       onSubmit={onSubmit}
       className="bg-white rounded-3xl shadow-lg border border-blue-100 p-5 md:p-6"
@@ -12,8 +12,8 @@ export default function SearchForm({ city, setCity, error, loading, onSubmit }) 
         <input
           id="city"
           value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="Exemplu: Iași, București, Chicago"
+          onChange={(e) => setCity(e.target.value)}//valoarea vine din city la scrierea - setCity(...) face update la state-ul din componenta părinte
+          placeholder="Exemplu: Iași, București, Chicago"//ghid utilizator
           className={`flex-1 px-4 py-3 rounded-2xl border text-gray-800 bg-blue-50/50 outline-none transition
             ${error ? "border-red-300 focus:ring-2 focus:ring-red-100" : "border-blue-100 focus:ring-2 focus:ring-blue-200"}`}
         />

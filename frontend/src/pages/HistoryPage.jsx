@@ -1,39 +1,39 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Header from "../components/Header";
-import { clearSearchHistory, getSearchHistory } from "../api/weatherApi";
+import { useEffect, useState } from "react";//pastreaza date si ruleaza automat cand pagina se deschide
+import { Link } from "react-router-dom";//dice din istoric la pagina principala
+import Header from "../components/Header";//nav bar de sus
+import { clearSearchHistory, getSearchHistory } from "../api/weatherApi";//import la functii care comunica cu backendul
 
 export default function HistoryPage() {
-  const [history, setHistory] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [history, setHistory] = useState([]);//pastreaza linile de cautare
+  const [loading, setLoading] = useState(true);//control mesaj de incarcare istoric
+  const [error, setError] = useState("");//pastreaza mesajele erori
 
   useEffect(() => {
     loadHistory();
-  }, []);
+  }, []);//incarca istoricul prin loadHistory()
 
-  async function loadHistory() {
+  async function loadHistory() {//cere istoricul de la backend
     setLoading(true);
-    setError("");
+    setError("");//porneste incarca currata erorile vechi
 
     try {
       const data = await getSearchHistory();
-      setHistory(data);
+      setHistory(data);//pune istoricul primit de la backend in history
     } catch (err) {
-      setError(err.message);
+      setError(err.message);//salveaza eroarea pentru a o afisa 
     } finally {
       setLoading(false);
-    }
+    }//opreste incarcarea chiar daca a reusit sau nu
   }
 
-  async function handleClear() {
+  async function handleClear() {// functie de stergere istoric
     setError("");
 
     try {
       const data = await clearSearchHistory();
-      setHistory(data);
+      setHistory(data);//cererea de delete catre backend si sterge totul din db.json
     } catch (err) {
-      setError(err.message);
+      setError(err.message);//salveaza erorile pentru a le afisa
     }
   }
 

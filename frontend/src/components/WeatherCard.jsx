@@ -1,5 +1,5 @@
-export default function WeatherCard({ weather }) {
-  if (!weather) return null;
+export default function WeatherCard({ weather }) {//primeste obiectul weather
+  if (!weather) return null;//daca nu exista date afiseaza nimic
 
   return (
     <section className="bg-white rounded-3xl shadow-lg border border-blue-100 overflow-hidden">

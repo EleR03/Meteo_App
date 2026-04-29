@@ -1,20 +1,20 @@
 // Fisier pentru preluarea si procesarea datelor meteo.
 // Aici tinem conversiile, recomandarea si transformarea directiei vantului.
 
-const OPENWEATHER_URL = "https://api.openweathermap.org/data/2.5/weather";
+const OPENWEATHER_URL = "https://api.openweathermap.org/data/2.5/weather";//adresa pentru endpoitul vreme curenta openweathermap
 
 function kelvinToCelsius(value) {
   return Math.round(value - 273.15);
-}
+}//conversia temperaturi din kelvini in celsius
 
 function celsiusToFahrenheit(value) {
   return Math.round((value * 9) / 5 + 32);
-}
+}//conversia temperaturi din celsius in farinheit
 
 function formatTime(unixTime, timezoneOffset) {
   const localDate = new Date((unixTime + timezoneOffset) * 1000);
   return localDate.toISOString().slice(11, 16);
-}
+}// conversie pentru timp din API din Unix in timp normal si calculeaza pentru orasul cautat si zona de timp
 
 function getWindDirection(degrees = 0) {
   const directions = [
@@ -38,7 +38,7 @@ function getWindDirection(degrees = 0) {
 
   const index = Math.round(degrees / 22.5) % 16;
   return directions[index];
-}
+}// calculeaza directia vantului din grade cae sunt trimise de API in directia propriu zisa sunt 16 directii
 
 function getWeatherIcon(main = "") {
   const value = main.toLowerCase();
@@ -51,7 +51,7 @@ function getWeatherIcon(main = "") {
   if (value.includes("mist") || value.includes("fog")) return "🌫️";
 
   return "🌤️";
-}
+}// alege iconita corespunzator cu vremea 
 
 function buildRecommendation({ tempC, condition, windSpeed }) {
   const conditionLower = condition.toLowerCase();
@@ -108,15 +108,15 @@ function buildRecommendation({ tempC, condition, windSpeed }) {
     coat: false,
     umbrella: false,
   };
-}
+}// recomandare pentru utilizator  verifica vremea in dependenta de asta returneaza un obiect de tip umbrela sau coat
 
-function normalizeWeatherData(data, searchedCity = "") {
+function normalizeWeatherData(data, searchedCity = "") {// transforma datele de la API brute in obiect simplu 
   const tempC = kelvinToCelsius(data.main.temp);
-  const tempF = celsiusToFahrenheit(tempC);
+  const tempF = celsiusToFahrenheit(tempC); //ia temperatura
   const condition = data.weather?.[0]?.description || "vreme necunoscută";
-  const mainCondition = data.weather?.[0]?.main || "";
+  const mainCondition = data.weather?.[0]?.main || "";//ia descrierea vremi
   const windDegrees = data.wind?.deg || 0;
-  const windSpeed = data.wind?.speed || 0;
+  const windSpeed = data.wind?.speed || 0;//ia vantul
 
   return {
     city: searchedCity || data.name,
@@ -140,30 +140,30 @@ function normalizeWeatherData(data, searchedCity = "") {
       sunset: formatTime(data.sys.sunset, data.timezone),
     },
     recommendation: buildRecommendation({ tempC, condition, windSpeed }),
-  };
+  };//returneaza obiectul final vizibil in formatul din aplicatie
 }
 
-async function fetchWeatherByCity(city) {
+async function fetchWeatherByCity(city) {//functia de request catre API 
   const apiKey = process.env.OPENWEATHER_API_KEY;
 
   if (!apiKey) {
     const error = new Error("Lipsește cheia OpenWeatherMap din fișierul .env.");
     error.statusCode = 500;
-    throw error;
+    throw error;//ea cheia di .env daca nu este acolo arunca eroare
   }
 
   const url = `${OPENWEATHER_URL}?q=${encodeURIComponent(city)}&appid=${apiKey}&lang=ro`;
-  const response = await fetch(url);
+  const response = await fetch(url);//construieste url face requiestul
 
   if (!response.ok) {
     const error = new Error("Nu s-au putut prelua datele meteo.");
     error.statusCode = response.status;
     throw error;
-  }
+  }// daca api da eroare arunca errorea  ca nu sa putut prelua datele
 
   const data = await response.json();
   return normalizeWeatherData(data, city);
-}
+}// daca e bine trimite datele brute si le retrurneaza in format
 
 module.exports = {
   kelvinToCelsius,
@@ -172,4 +172,4 @@ module.exports = {
   buildRecommendation,
   normalizeWeatherData,
   fetchWeatherByCity,
-};
+};// functii pentru server.js 

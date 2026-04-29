@@ -1,5 +1,5 @@
 export default function RecommendationBox({ recommendation }) {
-  if (!recommendation) return null;
+  if (!recommendation) return null;//primeste un obiect de tip recom.din backend  iar daca nu exista o recomandare returneaza nul adica nimic
 
   return (
     <section className="rounded-3xl bg-white shadow-lg border border-blue-100 p-6 md:p-7">
