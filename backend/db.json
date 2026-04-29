@@ -1,0 +1,54 @@
+{
+  "searches": [
+    {
+      "id": "9",
+      "city": "Iași",
+      "country": "RO",
+      "temperatureCelsius": 8,
+      "temperatureFahrenheit": 46,
+      "condition": "cer senin",
+      "recommendation": "Ar fi bine să iei o haină.",
+      "createdAt": "2026-04-29T05:23:02.675Z"
+    },
+    {
+      "id": "8",
+      "city": "Los Angeles",
+      "country": "US",
+      "temperatureCelsius": 16,
+      "temperatureFahrenheit": 61,
+      "condition": "cer senin",
+      "recommendation": "Vreme acceptabilă pentru ieșit.",
+      "createdAt": "2026-04-29T05:22:51.904Z"
+    },
+    {
+      "id": "7",
+      "city": "Dubai",
+      "country": "AE",
+      "temperatureCelsius": 35,
+      "temperatureFahrenheit": 95,
+      "condition": "cer senin",
+      "recommendation": "Vreme acceptabilă pentru ieșit.",
+      "createdAt": "2026-04-29T05:22:33.373Z"
+    },
+    {
+      "id": "4",
+      "city": "Yakutsk",
+      "country": "RU",
+      "temperatureCelsius": -4,
+      "temperatureFahrenheit": 25,
+      "condition": "cer senin",
+      "recommendation": "Ar fi bine să iei o haină.",
+      "createdAt": "2026-04-28T19:24:17.020Z"
+    },
+    {
+      "id": "2",
+      "city": "Chicago",
+      "country": "US",
+      "temperatureCelsius": 17,
+      "temperatureFahrenheit": 63,
+      "condition": "câțiva nori",
+      "recommendation": "Vreme acceptabilă pentru ieșit.",
+      "createdAt": "2026-04-28T19:22:27.171Z"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+/* Tailwind v4: exact ca în proiectul webdev, folosim plugin-ul oficial din Vite. */
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #2563eb;
+  --color-brand-dark: #1e3a8a;
+  --color-brand-light: #eff6ff;
+}
+
+body {
+  margin: 0;
+  background: #eff6ff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
